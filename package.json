@@ -1,0 +1,53 @@
+{
+  "name": "@mihaiblaga89/bmw-connecteddrive-api",
+  "version": "0.0.1",
+  "description": "BMW ConnectedDrive API JS implementation",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx babel src --out-dir dist",
+    "watch": "npx babel src --watch --out-dir dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mihaiblaga89/bmw-connecteddrive-api.git"
+  },
+  "keywords": [
+    "bmw",
+    "connecteddrive",
+    "api",
+    "bmw-connecteddrive"
+  ],
+  "author": "Mihai Blaga <mihaiblaga89@gmail.com> (https://www.mihaiblaga.dev)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mihaiblaga89/bmw-connecteddrive-api/issues"
+  },
+  "homepage": "https://github.com/mihaiblaga89/bmw-connecteddrive-api#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "moment": "^2.24.0",
+    "querystring": "^0.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0",
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.14.3",
+    "husky": "^3.0.5",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
