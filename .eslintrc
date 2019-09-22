@@ -6,7 +6,8 @@
     ],
     "plugins": [
         "react",
-        "prettier"
+        "prettier",
+        "jest"
     ],
     "rules": {
         "react/jsx-filename-extension": [
@@ -26,6 +27,8 @@
     },
     "env": {
         "node": true,
-        "browser": true
+        "browser": true,
+        "es6": true,
+        "jest": true,
     }
 }
