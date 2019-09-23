@@ -1,0 +1,43 @@
+{
+    "src": ["./src/**/*.js", "./*.md"],
+    "dest": "./docs",
+    "clean": true,
+    "jsdoc": {
+        "recurse": true,
+        "undocumented": true
+    },
+    "app": {
+        "title": "BMW ConnectedDrive API Documentation",
+        "entrance": "content:readme",
+        "routing": "query"
+    },
+    "template": {
+        "path": "zebra",
+        "options": {
+            "title": {
+                "label": "API",
+                "href": "/?api"
+            },
+            "navbar": {
+                "menu": [
+                    {
+                        "label": "Docs",
+                        "iconClass": "fas fa-book",
+                        "href": "./"
+                    },
+                    {
+                        "label": "API",
+                        "iconClass": "fas fa-mouse-pointer",
+                        "href": "?api"
+                    },
+                    {
+                        "label": "GitHub",
+                        "iconClass": "fab fa-github",
+                        "href": "https://github.com/mihaiblaga89/bmw-connecteddrive-api",
+                        "target": "_blank"
+                    }
+                ]
+            }
+        }
+    }
+}

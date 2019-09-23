@@ -8,8 +8,17 @@ export const getHost = region => {
     if (SERVER_URLS[region]) return SERVER_URLS[region];
     throw new Error('Unsupported region. Supported values are us|eu|cn');
 };
-
+/**
+ * Handles all URLs required by BMW API
+ *
+ * @class BMWURLs
+ */
 class BMWURLs {
+    /**
+     *Creates an instance of BMWURLs.
+     * @param {*} region
+     * @memberof BMWURLs
+     */
     constructor(region) {
         this.region = region;
         this.host = getHost(region);
