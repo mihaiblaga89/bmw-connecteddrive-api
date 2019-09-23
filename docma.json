@@ -9,7 +9,8 @@
     "app": {
         "title": "BMW ConnectedDrive API Documentation",
         "entrance": "content:readme",
-        "routing": "query"
+        "routing": "query",
+        "server": "github"
     },
     "template": {
         "path": "zebra",

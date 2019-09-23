@@ -4824,9 +4824,9 @@ var docma = Object.freeze(
             title: 'BMW ConnectedDrive API Documentation',
             entrance: 'content:readme',
             routing: { method: 'query', caseSensitive: true },
+            server: 'github',
             meta: null,
             base: '/',
-            server: 'static',
             favicon: '',
         },
         template: {
