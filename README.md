@@ -5,4 +5,4 @@
 
 JavaScript implementation of the BMW's ConnectedDrive API
 
-@TODO write documentation
+@todo write documentation
