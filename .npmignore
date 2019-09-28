@@ -6,3 +6,8 @@ coverage
 dist/tests
 docs
 docma.json
+.github
+.babelrc
+.editorconfig
+.eslintrc
+.prettierrc
