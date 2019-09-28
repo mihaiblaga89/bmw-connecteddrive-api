@@ -1,2 +1,3 @@
 todo:
     keyword: ['@todo', 'TODO', '@makeAnIssue', '@TODO']
+    exclude: 'docs'
