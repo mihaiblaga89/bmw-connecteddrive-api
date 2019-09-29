@@ -1,6 +1,6 @@
 {
     "name": "@mihaiblaga89/bmw-connecteddrive-api",
-    "version": "0.0.4",
+    "version": "0.1.0",
     "description": "BMW ConnectedDrive API JS implementation",
     "main": "dist/index.js",
     "scripts": {
