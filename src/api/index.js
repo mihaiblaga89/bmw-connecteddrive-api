@@ -33,6 +33,12 @@ class API {
         this.tokenExpiresAt = null;
 
         logger.init(debug);
+        logger.log('initialized API with', {
+            region,
+            username,
+            password,
+            debug,
+        });
         await this.getVehicles();
     }
 
