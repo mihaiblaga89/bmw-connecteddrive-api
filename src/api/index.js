@@ -5,9 +5,10 @@ import moment from 'moment';
 
 import BMWURLs from '../helpers/urls';
 import Vehicle from '../helpers/vehicle';
+import logger from '../helpers/logger';
 
 class API {
-    async init({ region, username, password }) {
+    async init({ region, username, password, debug = false }) {
         this.region = region;
         this.username = username;
         this.password = password;
@@ -17,11 +18,12 @@ class API {
         this.refreshToken = null;
         this.tokenExpiresAt = null;
 
+        logger.initialize(debug);
         await this.getVehicles();
     }
 
     async request(url) {
-        console.log('making request', url);
+        logger.log('making request', url);
         if (
             !this.oauthToken ||
             (this.tokenExpiresAt && moment().isAfter(this.tokenExpiresAt))
@@ -39,13 +41,17 @@ class API {
         headers.Authorization = `Bearer ${this.oauthToken}`;
         headers.referer = 'https://www.bmw-connecteddrive.de/app/index.html';
 
-        return axios.get(url, {
+        const { data } = await axios.get(url, {
             headers,
         });
+
+        logger.log('request response', data);
+
+        return data;
     }
 
     async getToken() {
-        console.log('getting token');
+        logger.log('getting token');
         const { username, password } = this;
         const postData = querystring.stringify({
             grant_type: 'password',
@@ -65,22 +71,17 @@ class API {
                 'nQv6CqtxJuXWP74xf3CJwUEP:1zDHx6un4cDjybLENN3kyfumX2kEYigWPcQpdvDRpIBk7rOJ',
             'User-Agent': 'okhttp/2.60',
         };
-        try {
-            const { data } = await axios.post(
-                this.BMWURLs.getAuthURL(),
-                postData,
-                {
-                    headers,
-                }
-            );
+        logger.log('token data', { postData, headers });
+        const { data } = await axios.post(this.BMWURLs.getAuthURL(), postData, {
+            headers,
+        });
 
-            const { access_token, expires_in } = data;
+        logger.log('token response', { data });
 
-            this.oauthToken = access_token;
-            this.tokenExpiresAt = moment().add(expires_in, 'seconds');
-        } catch (e) {
-            console.log('ERROR', e);
-        }
+        const { access_token, expires_in } = data;
+
+        this.oauthToken = access_token;
+        this.tokenExpiresAt = moment().add(expires_in, 'seconds');
     }
 
     async getVehicles() {
@@ -91,7 +92,7 @@ class API {
             );
         }
 
-        console.log('VEHICLES', data);
+        logger.log('VEHICLES', data);
     }
 
     get currentVehicles() {
