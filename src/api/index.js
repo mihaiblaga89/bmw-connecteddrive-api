@@ -60,13 +60,10 @@ class API {
 
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'User-Agent':
-                'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.75 Safari/537.36',
         };
 
         headers.accept = 'application/json';
         headers.Authorization = `Bearer ${this.oauthToken}`;
-        headers.referer = 'https://www.bmw-connecteddrive.de/app/index.html';
 
         const { data } = await axios.get(url, {
             headers,
@@ -93,15 +90,10 @@ class API {
         });
 
         const headers = {
-            'Content-Length': '124',
-            Connection: 'Keep-Alive',
-            Host: this.BMWURLs.getHost(),
-            'Accept-Encoding': 'gzip',
             Authorization:
                 'Basic blF2NkNxdHhKdVhXUDc0eGYzQ0p3VUVQOjF6REh4NnVuNGNEanliTEVOTjNreWZ1bVgya0VZaWdXUGNRcGR2RFJwSUJrN3JPSg==',
             Credentials:
                 'nQv6CqtxJuXWP74xf3CJwUEP:1zDHx6un4cDjybLENN3kyfumX2kEYigWPcQpdvDRpIBk7rOJ',
-            'User-Agent': 'okhttp/2.60',
         };
         logger.log('token data', { postData, headers });
         const { data } = await axios.post(this.BMWURLs.getAuthURL(), postData, {
