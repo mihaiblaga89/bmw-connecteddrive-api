@@ -8,6 +8,10 @@ import Vehicle from '../helpers/vehicle';
 import logger from '../helpers/logger';
 
 class API {
+    constructor() {
+        this.initialized = false;
+    }
+
     /**
      *
      * * Initialization params
@@ -23,6 +27,12 @@ class API {
      * @memberof API
      */
     async init({ region, username, password, debug = false }) {
+        if (!region || !username || !password) {
+            throw new Error(
+                'You must specify all the required parameters (region, username, password)'
+            );
+        }
+        this.initialized = true;
         this.region = region;
         this.username = username;
         this.password = password;
@@ -51,6 +61,8 @@ class API {
      * @memberof API
      */
     async request(url) {
+        if (!this.initialized)
+            throw new Error('You called a function before init()');
         logger.log('making request', url);
         if (
             !this.oauthToken ||
@@ -81,6 +93,8 @@ class API {
      * @memberof API
      */
     async getToken() {
+        if (!this.initialized)
+            throw new Error('You called a function before init()');
         logger.log('getting token');
         const { username, password } = this;
         const postData = querystring.stringify({
@@ -115,6 +129,8 @@ class API {
      * @memberof API
      */
     async getVehicles() {
+        if (!this.initialized)
+            throw new Error('You called a function before init()');
         const data = await this.request(this.BMWURLs.getVehiclesURL());
         if (data.vehicles) {
             this.vehicles = data.vehicles.map(
@@ -126,6 +142,8 @@ class API {
     }
 
     get currentVehicles() {
+        if (!this.initialized)
+            throw new Error('You called a function before init()');
         return this.vehicles;
     }
 }
