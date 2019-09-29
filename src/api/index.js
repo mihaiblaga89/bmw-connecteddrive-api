@@ -8,6 +8,20 @@ import Vehicle from '../helpers/vehicle';
 import logger from '../helpers/logger';
 
 class API {
+    /**
+     *
+     * * Initialization params
+     * @typedef {Object} APIInitObject
+     * @property {('eu'|'us'|'cn')} region - Region where you have created the ConnectedDrive account
+     * @property {string} username - The username (user@example.com)
+     * @property {string} password - The password
+     * @property {Boolean} [debug=false] - If you want debugging messages shown
+     *
+     * * Initializes the API
+     *
+     * @param {APIInitObject}
+     * @memberof API
+     */
     async init({ region, username, password, debug = false }) {
         this.region = region;
         this.username = username;
@@ -18,7 +32,7 @@ class API {
         this.refreshToken = null;
         this.tokenExpiresAt = null;
 
-        logger.initialize(debug);
+        logger.init(debug);
         await this.getVehicles();
     }
 
