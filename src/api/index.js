@@ -36,6 +36,13 @@ class API {
         await this.getVehicles();
     }
 
+    /**
+     * Make a generic request to BMW API
+     *
+     * @param {String} url
+     * @returns {Promise}
+     * @memberof API
+     */
     async request(url) {
         logger.log('making request', url);
         if (
@@ -64,6 +71,11 @@ class API {
         return data;
     }
 
+    /**
+     * Gets the auth token from BMW API
+     *
+     * @memberof API
+     */
     async getToken() {
         logger.log('getting token');
         const { username, password } = this;
@@ -98,6 +110,11 @@ class API {
         this.tokenExpiresAt = moment().add(expires_in, 'seconds');
     }
 
+    /**
+     * Gets your vehicles from BMW API and stores them
+     *
+     * @memberof API
+     */
     async getVehicles() {
         const { data } = await this.request(this.BMWURLs.getVehiclesURL());
         if (data.vehicles) {
