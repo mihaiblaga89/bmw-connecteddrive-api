@@ -125,7 +125,7 @@ class API {
         const { data } = await this.request(this.BMWURLs.getVehiclesURL());
         if (data.vehicles) {
             this.vehicles = data.vehicles.map(
-                vehicle => new Vehicle(vehicle, this.region)
+                vehicle => new Vehicle(vehicle, this)
             );
         }
 

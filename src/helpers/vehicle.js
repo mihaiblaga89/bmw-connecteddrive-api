@@ -1,10 +1,10 @@
 import BMWURLs from './urls';
-import API from '../index';
 
 class Vehicle {
-    constructor(originalData, region) {
+    constructor(originalData, API) {
         this.originalData = originalData;
-        this.BMWURLs = new BMWURLs(region);
+        this.BMWURLs = new BMWURLs(API.region);
+        this.API = API;
     }
 
     get vin() {
@@ -16,7 +16,7 @@ class Vehicle {
     }
 
     getStatus() {
-        return API.request(this.BMWURLs.getVehicleStatusURL(this.vin));
+        return this.API.request(this.BMWURLs.getVehicleStatusURL(this.vin));
     }
 }
 
