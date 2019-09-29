@@ -36,7 +36,7 @@
         "@babel/node": "^7.6.2",
         "@babel/preset-env": "^7.6.2",
         "docma": "^3.2.2",
-        "eslint": "^6.4.0",
+        "eslint": "^6.5.0",
         "eslint-config-airbnb": "^18.0.1",
         "eslint-config-prettier": "^6.3.0",
         "eslint-plugin-import": "^2.18.2",
