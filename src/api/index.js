@@ -40,6 +40,7 @@ class API {
             debug,
         });
         await this.getVehicles();
+        return true;
     }
 
     /**
@@ -114,7 +115,7 @@ class API {
      * @memberof API
      */
     async getVehicles() {
-        const { data } = await this.request(this.BMWURLs.getVehiclesURL());
+        const data = await this.request(this.BMWURLs.getVehiclesURL());
         if (data.vehicles) {
             this.vehicles = data.vehicles.map(
                 vehicle => new Vehicle(vehicle, this)

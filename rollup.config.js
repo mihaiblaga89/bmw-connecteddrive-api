@@ -13,6 +13,6 @@ export default {
     plugins: [
         resolve(),
         commonjs(),
-        terser(), // minifies generated bundles
+        // terser(), // minifies generated bundles
     ],
 };
