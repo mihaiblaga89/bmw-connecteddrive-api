@@ -20,13 +20,20 @@ class API {
      * @property {string} username - The username (user@example.com)
      * @property {string} password - The password
      * @property {Boolean} [debug=false] - If you want debugging messages shown
+     * @property {Boolean} [skipVehicles=false] - If you want to skip the initial request of vehicles and do it manually with API.getVehicles()
      *
      * * Initializes the API
      *
      * @param {APIInitObject}
      * @memberof API
      */
-    async init({ region, username, password, debug = false }) {
+    async init({
+        region,
+        username,
+        password,
+        debug = false,
+        skipVehicles = false,
+    }) {
         if (!region || !username || !password) {
             throw new Error(
                 'You must specify all the required parameters (region, username, password)'
@@ -49,7 +56,10 @@ class API {
             password,
             debug,
         });
-        await this.getVehicles();
+        // eslint-disable-next-line no-unused-expressions
+        if (!skipVehicles) {
+            await this.getVehicles();
+        }
         return true;
     }
 
@@ -139,6 +149,7 @@ class API {
         }
 
         logger.log('VEHICLES', data);
+        return this.vehicles;
     }
 
     get currentVehicles() {
