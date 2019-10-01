@@ -6,13 +6,15 @@
     "scripts": {
         "test": "jest",
         "build": "rollup -c",
-        "watch": "npx babel src --watch --out-dir dist",
-        "docs": "docma"
+        "watch": "npx babel src --watch --out-dir dist"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/mihaiblaga89/bmw-connecteddrive-api.git"
     },
+    "files": [
+        "/dist"
+    ],
     "keywords": [
         "bmw",
         "connecteddrive",
@@ -36,7 +38,6 @@
         "@babel/node": "^7.6.2",
         "@babel/preset-env": "^7.6.2",
         "babel-polyfill": "^6.26.0",
-        "docma": "^3.2.2",
         "eslint": "^6.5.1",
         "eslint-config-airbnb-base": "^14.0.0",
         "eslint-config-prettier": "^6.3.0",
@@ -61,7 +62,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm run docs && git add -A && pretty-quick --staged"
+            "pre-commit": "docma && git add -A && pretty-quick --staged"
         }
     }
 }
