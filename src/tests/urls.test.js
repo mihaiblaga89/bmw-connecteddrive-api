@@ -1,4 +1,4 @@
-import BMWURLs from '../helpers/urls';
+import BMWURLs, { getHost } from '../helpers/urls';
 
 const URLs = new BMWURLs('eu');
 
@@ -30,5 +30,8 @@ describe('Testing URLS', () => {
         expect(URLs.getVehicleImage('test', 100, 100, 'test')).toBe(
             'https://b2vapi.bmwgroup.com/webapi/v1/user/vehicles/test/image?width=100&height=100&view=test'
         );
+    });
+    it('should throw when no region', () => {
+        expect(getHost).toThrowErrorMatchingSnapshot();
     });
 });
