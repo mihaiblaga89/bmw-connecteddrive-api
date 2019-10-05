@@ -11,7 +11,7 @@
         "entrance": "content:readme",
         "routing": "query",
         "server": "github",
-        "base": "/bmw-connecteddrive-api"
+        "base": "/"
     },
     "template": {
         "path": "zebra",
