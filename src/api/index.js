@@ -73,7 +73,7 @@ class API {
      * @returns {Promise}
      * @memberof API
      */
-    async request(url) {
+    async request(url, { overwriteHeaders = {}, method = 'GET' }) {
         if (!this.initialized)
             throw new Error('You called a function before init()');
         logger.log('making request', url);
@@ -87,12 +87,13 @@ class API {
 
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
+            Accept: 'application/json',
+            Authorization: `Bearer ${this.oauthToken}`,
+            ...overwriteHeaders,
         };
 
-        headers.accept = 'application/json';
-        headers.Authorization = `Bearer ${this.oauthToken}`;
-
-        const { data } = await axios.get(url, {
+        const { data } = await axios(url, {
+            method,
             headers,
         });
 

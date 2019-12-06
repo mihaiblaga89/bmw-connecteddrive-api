@@ -22,7 +22,8 @@ class Vehicle {
 
     getImage(width = 400, height = 400, view = VEHICLE_VIEWS.FRONTSIDE) {
         return this.API.request(
-            this.BMWURLs.getVehicleImage(this.vin, width, height, view)
+            this.BMWURLs.getVehicleImage(this.vin, width, height, view),
+            { overwriteHeaders: { Accept: 'image/png' } }
         );
     }
 }
