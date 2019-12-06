@@ -62,7 +62,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "docma && git add -A && pretty-quick --staged"
+            "pre-commit": "yarn test && docma && git add -A && pretty-quick --staged"
         }
     }
 }

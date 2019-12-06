@@ -7,29 +7,28 @@ afterEach(() => {
     mockAxios.reset();
 });
 
-const getTokenRequest = [
-    'https://b2vapi.bmwgroup.com/gcdm/oauth/token',
-    'grant_type=password&scope=authenticate_user%20vehicle_data%20remote_services&username=u&password=p',
-    {
-        headers: {
-            Authorization:
-                'Basic blF2NkNxdHhKdVhXUDc0eGYzQ0p3VUVQOjF6REh4NnVuNGNEanliTEVOTjNreWZ1bVgya0VZaWdXUGNRcGR2RFJwSUJrN3JPSg==',
-            Credentials:
-                'nQv6CqtxJuXWP74xf3CJwUEP:1zDHx6un4cDjybLENN3kyfumX2kEYigWPcQpdvDRpIBk7rOJ',
-        },
+const getTokenRequest = {
+    data:
+        'grant_type=password&scope=authenticate_user%20vehicle_data%20remote_services&username=u&password=p',
+    headers: {
+        Authorization:
+            'Basic blF2NkNxdHhKdVhXUDc0eGYzQ0p3VUVQOjF6REh4NnVuNGNEanliTEVOTjNreWZ1bVgya0VZaWdXUGNRcGR2RFJwSUJrN3JPSg==',
+        Credentials:
+            'nQv6CqtxJuXWP74xf3CJwUEP:1zDHx6un4cDjybLENN3kyfumX2kEYigWPcQpdvDRpIBk7rOJ',
     },
-];
+    url: 'https://b2vapi.bmwgroup.com/gcdm/oauth/token',
+};
 
-const getVehiclesRequest = [
-    'https://b2vapi.bmwgroup.com/webapi/v1/user/vehicles',
-    {
-        headers: {
-            Authorization: 'Bearer abcd1234',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            accept: 'application/json',
-        },
+const getVehiclesRequest = {
+    data: {},
+    headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer abcd1234',
+        'Content-Type': 'application/x-www-form-urlencoded',
     },
-];
+    method: 'GET',
+    url: 'https://b2vapi.bmwgroup.com/webapi/v1/user/vehicles',
+};
 
 const getVehiclesResponse = {
     data: {
@@ -49,14 +48,14 @@ const getVehiclesResponse = {
 it('should initialize correctly', async () => {
     const catchFn = jest.fn();
     const thenFn = jest.fn();
-    expect.assertions();
+    expect.assertions(2);
 
-    API.init({ region: 'eu', username: 'u', password: 'p' })
+    API.init({ region: 'eu', username: 'u', password: 'p', debug: true })
         .then(thenFn)
         .catch(catchFn);
 
     // get token
-    expect(mockAxios.post).toHaveBeenCalledWith(...getTokenRequest);
+    expect(mockAxios.post).toHaveBeenCalledWith(getTokenRequest);
 
     // get token response
     const tokenResponse = {
@@ -68,49 +67,20 @@ it('should initialize correctly', async () => {
     expect(catchFn).not.toHaveBeenCalled();
 });
 
-it('should get token correctly', () => {
-    const catchFn = jest.fn();
-    const thenFn = jest.fn();
+it('should get vehicles correctly', async () => {
+    expect.assertions(3);
 
-    API.getToken()
-        .then(thenFn)
-        .catch(catchFn);
+    const promise = API.getVehicles();
 
-    // get token
-    expect(mockAxios.post).toHaveBeenCalledWith(...getTokenRequest);
-
-    // get token response
-    const tokenResponse = {
-        data: { access_token: 'abcd1234', expires_in: 3600 },
-    };
-    mockAxios.mockResponse(tokenResponse);
-
-    // nope, you should not reach this function
-    expect(catchFn).not.toHaveBeenCalled();
-});
-
-it('should get vehicles correctly', () => {
-    const catchFn = jest.fn();
-    const thenFn = jest.fn();
-
-    API.getVehicles()
-        .then(thenFn)
-        .catch(catchFn);
-
-    // get vehicles
-    expect(mockAxios.get).toHaveBeenCalledWith(...getVehiclesRequest);
-
-    // get vehicles response
     mockAxios.mockResponse(getVehiclesResponse);
 
-    // nope, you should not reach this function
-    expect(catchFn).not.toHaveBeenCalled();
-});
+    const vehicles = await promise;
 
-afterAll(() => {
-    mockAxios.reset();
-    expect(API.vehicles).toEqual(
+    expect(vehicles).toEqual(
         getVehiclesResponse.data.vehicles.map(v => new Vehicle(v, API))
     );
+
+    expect(mockAxios.get).toHaveBeenCalledWith(getVehiclesRequest);
+
     expect(API.currentVehicles).toEqual(API.vehicles);
 });

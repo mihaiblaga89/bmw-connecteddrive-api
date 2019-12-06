@@ -73,7 +73,10 @@ class API {
      * @returns {Promise}
      * @memberof API
      */
-    async request(url, { overwriteHeaders = {}, method = 'GET' }) {
+    async request(
+        url,
+        { overwriteHeaders = {}, method = 'GET', postData = {} } = {}
+    ) {
         if (!this.initialized)
             throw new Error('You called a function before init()');
         logger.log('making request', url);
@@ -92,9 +95,13 @@ class API {
             ...overwriteHeaders,
         };
 
-        const { data } = await axios(url, {
+        const axiosMethod = method === 'GET' ? axios.get : axios.post;
+
+        const { data } = await axiosMethod({
+            url,
             method,
             headers,
+            data: postData,
         });
 
         logger.log('request response', data);
@@ -126,7 +133,9 @@ class API {
                 'nQv6CqtxJuXWP74xf3CJwUEP:1zDHx6un4cDjybLENN3kyfumX2kEYigWPcQpdvDRpIBk7rOJ',
         };
         logger.log('token data', { postData, headers });
-        const { data } = await axios.post(this.BMWURLs.getAuthURL(), postData, {
+        const { data } = await axios.post({
+            url: this.BMWURLs.getAuthURL(),
+            data: postData,
             headers,
         });
 
@@ -147,6 +156,7 @@ class API {
         if (!this.initialized)
             throw new Error('You called a function before init()');
         const data = await this.request(this.BMWURLs.getVehiclesURL());
+
         if (data.vehicles) {
             this.vehicles = data.vehicles.map(
                 vehicle => new Vehicle(vehicle, this)
