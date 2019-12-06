@@ -1,8 +1,4 @@
-const SERVER_URLS = {
-    us: 'b2vapi.bmwgroup.us',
-    eu: 'b2vapi.bmwgroup.com',
-    cn: 'b2vapi.bmwgroup.cn:8592',
-};
+import { SERVER_URLS } from '../constants';
 
 export const getHost = region => {
     if (SERVER_URLS[region]) return SERVER_URLS[region];

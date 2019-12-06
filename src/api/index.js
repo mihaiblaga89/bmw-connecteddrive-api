@@ -6,6 +6,9 @@ import moment from 'moment';
 import BMWURLs from '../helpers/urls';
 import Vehicle from '../helpers/vehicle';
 import logger from '../helpers/logger';
+import { VEHICLE_VIEWS } from '../constants';
+
+const sleep = (ms = 0) => new Promise(r => setTimeout(r, ms));
 
 class API {
     constructor() {
@@ -79,6 +82,7 @@ class API {
             (this.tokenExpiresAt && moment().isAfter(this.tokenExpiresAt))
         ) {
             await this.getToken();
+            await sleep(1000); // if the request is made too quickly the API will reject it with 500
         }
 
         const headers = {
@@ -159,4 +163,8 @@ class API {
     }
 }
 
-export default new API();
+// adding constants
+const exported = new API();
+exported.VEHICLE_VIEWS = VEHICLE_VIEWS;
+
+export default exported;

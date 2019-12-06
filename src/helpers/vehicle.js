@@ -1,4 +1,5 @@
 import BMWURLs from './urls';
+import { VEHICLE_VIEWS } from '../constants';
 
 class Vehicle {
     constructor(originalData, API) {
@@ -17,6 +18,12 @@ class Vehicle {
 
     getStatus() {
         return this.API.request(this.BMWURLs.getVehicleStatusURL(this.vin));
+    }
+
+    getImage(width = 400, height = 400, view = VEHICLE_VIEWS.FRONTSIDE) {
+        return this.API.request(
+            this.BMWURLs.getVehicleImage(this.vin, width, height, view)
+        );
     }
 }
 
