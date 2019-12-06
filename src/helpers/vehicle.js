@@ -17,11 +17,13 @@ class Vehicle {
     }
 
     getStatus() {
-        return this.API.request(this.BMWURLs.getVehicleStatusURL(this.vin));
+        return this.API.requestWithAuth(
+            this.BMWURLs.getVehicleStatusURL(this.vin)
+        );
     }
 
     getImage(width = 400, height = 400, view = VEHICLE_VIEWS.FRONTSIDE) {
-        return this.API.request(
+        return this.API.requestWithAuth(
             this.BMWURLs.getVehicleImage(this.vin, width, height, view),
             { overwriteHeaders: { Accept: 'image/png' } }
         );

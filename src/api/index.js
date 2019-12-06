@@ -73,7 +73,7 @@ class API {
      * @returns {Promise}
      * @memberof API
      */
-    async request(
+    async requestWithAuth(
         url,
         { overwriteHeaders = {}, method = 'GET', postData = {} } = {}
     ) {
@@ -87,25 +87,23 @@ class API {
             await this.getToken();
             await sleep(1000); // if the request is made too quickly the API will reject it with 500
         }
-
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
             Accept: 'application/json',
             Authorization: `Bearer ${this.oauthToken}`,
+            referer: 'https://www.bmw-connecteddrive.de/app/index.html',
             ...overwriteHeaders,
         };
+        // separated for easy testing
+        let response;
+        if (method === 'GET') {
+            response = await axios.get(url, { headers });
+        } else {
+            response = await axios.post(url, postData, { headers });
+        }
 
-        const axiosMethod = method === 'GET' ? axios.get : axios.post;
-
-        const { data } = await axiosMethod({
-            url,
-            method,
-            headers,
-            data: postData,
-        });
-
+        const { data } = response;
         logger.log('request response', data);
-
         return data;
     }
 
@@ -133,40 +131,44 @@ class API {
                 'nQv6CqtxJuXWP74xf3CJwUEP:1zDHx6un4cDjybLENN3kyfumX2kEYigWPcQpdvDRpIBk7rOJ',
         };
         logger.log('token data', { postData, headers });
-        const { data } = await axios.post({
-            url: this.BMWURLs.getAuthURL(),
-            data: postData,
+        const { data } = await axios.post(this.BMWURLs.getAuthURL(), postData, {
             headers,
         });
 
         logger.log('token response', { data });
 
-        const { access_token, expires_in } = data;
+        const { access_token, expires_in, refresh_token } = data;
 
         this.oauthToken = access_token;
+        this.refreshToken = refresh_token;
         this.tokenExpiresAt = moment().add(expires_in, 'seconds');
     }
 
     /**
-     * Gets your vehicles from BMW API and stores them
+     * Gets or refreshes your vehicles from BMW API and stores them
      *
      * @memberof API
      */
     async getVehicles() {
         if (!this.initialized)
             throw new Error('You called a function before init()');
-        const data = await this.request(this.BMWURLs.getVehiclesURL());
+        const { vehicles } = await this.requestWithAuth(
+            this.BMWURLs.getVehiclesURL()
+        );
 
-        if (data.vehicles) {
-            this.vehicles = data.vehicles.map(
-                vehicle => new Vehicle(vehicle, this)
-            );
+        if (vehicles) {
+            this.vehicles = vehicles.map(vehicle => new Vehicle(vehicle, this));
         }
 
-        logger.log('VEHICLES', data);
+        logger.log('VEHICLES', vehicles);
         return this.vehicles;
     }
 
+    /**
+     * Gets your currently stored vehicles
+     *
+     * @memberof API
+     */
     get currentVehicles() {
         if (!this.initialized)
             throw new Error('You called a function before init()');

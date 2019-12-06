@@ -4,13 +4,13 @@ const example = async () => {
     try {
         await API.init({
             region: 'eu',
-            username: 'user',
-            password: 'pass',
+            username: 'a@gmail.com',
+            password: 'b',
+            debug: true,
         });
 
         const { currentVehicles } = API;
-        const { data } = await currentVehicles[0].getStatus();
-        console.log('status', data);
+        console.log('currentVehicles', currentVehicles);
     } catch (e) {
         console.log('err', e);
     }

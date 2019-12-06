@@ -5,7 +5,7 @@ const vehicle = {
     model: '320d',
 };
 
-const api = { region: 'eu', request: jest.fn() };
+const api = { region: 'eu', requestWithAuth: jest.fn() };
 
 const v = new Vehicle(vehicle, api);
 
@@ -21,7 +21,7 @@ it('should return correct data', () => {
 it('should get status', () => {
     v.getStatus();
 
-    expect(api.request).toBeCalledWith(
+    expect(api.requestWithAuth).toBeCalledWith(
         'https://b2vapi.bmwgroup.com/webapi/v1/user/vehicles/WBAFFFFFFFF/status'
     );
 });
