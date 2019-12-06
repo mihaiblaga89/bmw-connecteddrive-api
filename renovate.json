@@ -2,6 +2,7 @@
     "extends": ["config:base"],
     "rangeStrategy": "bump",
     "automerge": true,
+    "commitMessageSuffix": "(ignore)",
     "major": {
         "automerge": false
     }
