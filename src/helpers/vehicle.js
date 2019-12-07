@@ -30,7 +30,10 @@ class Vehicle {
             { overwriteHeaders: { Accept: 'image/png' }, responseType: 'arraybuffer' }
         );
 
-        this.images[`${view}:${width}:${height}`] = new Buffer.from(binaryImage, 'binary').toString('base64');
+        this.images[`${view}:${width}:${height}`] = `data:image/png;base64,${Buffer.from(
+            binaryImage,
+            'binary'
+        ).toString('base64')}`;
         return this.images[`${view}:${width}:${height}`];
     }
 }
