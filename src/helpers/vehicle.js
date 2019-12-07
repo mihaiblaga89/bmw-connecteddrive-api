@@ -6,6 +6,7 @@ class Vehicle {
         this.originalData = originalData;
         this.BMWURLs = new BMWURLs(API.region);
         this.API = API;
+        this.images = {};
     }
 
     get vin() {
@@ -17,16 +18,20 @@ class Vehicle {
     }
 
     getStatus() {
-        return this.API.requestWithAuth(
-            this.BMWURLs.getVehicleStatusURL(this.vin)
-        );
+        return this.API.requestWithAuth(this.BMWURLs.getVehicleStatusURL(this.vin));
     }
 
-    getImage(width = 400, height = 400, view = VEHICLE_VIEWS.FRONTSIDE) {
-        return this.API.requestWithAuth(
+    async getImage(width = 400, height = 400, view = VEHICLE_VIEWS.FRONTSIDE) {
+        if (this.images[`${view}:${width}:${height}`]) {
+            return this.images[`${view}:${width}:${height}`];
+        }
+        const binaryImage = await this.API.requestWithAuth(
             this.BMWURLs.getVehicleImage(this.vin, width, height, view),
-            { overwriteHeaders: { Accept: 'image/png' } }
+            { overwriteHeaders: { Accept: 'image/png' }, responseType: 'arraybuffer' }
         );
+
+        this.images[`${view}:${width}:${height}`] = new Buffer.from(binaryImage, 'binary').toString('base64');
+        return this.images[`${view}:${width}:${height}`];
     }
 }
 

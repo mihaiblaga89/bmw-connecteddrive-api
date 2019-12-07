@@ -10,7 +10,10 @@ const example = async () => {
         });
 
         const { currentVehicles } = API;
+        // const { data } = await currentVehicles[0].getStatus();
         console.log('currentVehicles', currentVehicles);
+        const image = await currentVehicles[0].getImage();
+        console.log('img', image);
     } catch (e) {
         console.log('err', e);
     }
