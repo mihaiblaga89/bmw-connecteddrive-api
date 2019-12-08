@@ -36,6 +36,11 @@ class Vehicle {
         ).toString('base64')}`;
         return this.images[`${view}:${width}:${height}`];
     }
+
+    get name() {
+        const { yearOfConstruction, model, bodytype, brand } = this.originalData;
+        return `${yearOfConstruction} ${brand} ${bodytype} ${model}`; // 2017 BMW F30 320d
+    }
 }
 
 export default Vehicle;

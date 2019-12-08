@@ -45,9 +45,7 @@ class BMWURLs {
     }
 
     getRemoteServiceStatusURL(vin, serviceType) {
-        return `${this.getVehicleVinURL(
-            vin
-        )}/serviceExecutionStatus?serviceType=${serviceType}`;
+        return `${this.getVehicleVinURL(vin)}/serviceExecutionStatus?serviceType=${serviceType}`;
     }
 
     getRemoteServiceURL(vin) {
@@ -55,9 +53,7 @@ class BMWURLs {
     }
 
     getVehicleImage(vin, width, height, view) {
-        return `${this.getVehicleVinURL(
-            vin
-        )}/image?width=${width}&height=${height}&view=${view}`;
+        return `${this.getVehicleVinURL(vin)}/image?width=${width}&height=${height}&view=${view}`;
     }
 }
 
