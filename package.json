@@ -28,7 +28,7 @@
     },
     "homepage": "https://github.com/mihaiblaga89/bmw-connecteddrive-api#readme",
     "dependencies": {
-        "axios": "0.19.0-beta.1",
+        "axios": "0.19.0",
         "axios-retry": "^3.1.2",
         "moment": "^2.24.0",
         "querystring": "^0.2.0"
@@ -37,7 +37,7 @@
         "@babel/cli": "^7.7.5",
         "@babel/core": "^7.7.5",
         "@babel/node": "^7.7.4",
-        "@babel/preset-env": "^7.7.5",
+        "@babel/preset-env": "^7.7.6",
         "babel-polyfill": "^6.26.0",
         "eslint": "^6.7.2",
         "eslint-config-airbnb-base": "^14.0.0",
@@ -47,10 +47,10 @@
         "eslint-plugin-prettier": "^3.1.1",
         "husky": "^3.1.0",
         "jest": "^24.9.0",
-        "jest-mock-axios": "^3.1.2",
+        "jest-mock-axios": "^3.2.0",
         "prettier": "^1.19.1",
         "pretty-quick": "^2.0.1",
-        "rollup": "^1.27.8",
+        "rollup": "^1.27.9",
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-terser": "^5.1.2"
