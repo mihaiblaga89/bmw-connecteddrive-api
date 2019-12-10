@@ -6,4 +6,6 @@
 
 JavaScript implementation of the BMW's ConnectedDrive API
 
+Example: [BMWStatus](https://github.com/mihaiblaga89/bmw-status-app)
+
 @todo write documentation
