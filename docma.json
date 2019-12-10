@@ -2,6 +2,9 @@
     "src": ["./src/**/*.js", "./*.md"],
     "dest": "./docs",
     "clean": true,
+    "assets": {
+        "/": ["./CNAME"]
+    },
     "jsdoc": {
         "recurse": true,
         "undocumented": true

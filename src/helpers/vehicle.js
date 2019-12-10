@@ -37,7 +37,7 @@ class Vehicle {
     }
 
     /**
-     *
+     * Gets the status of the vehicle
      *
      * @param {Boolean} force - Force a refresh instead of getting cached data
      * @returns {Promise<VehicleStatus>}
@@ -50,7 +50,7 @@ class Vehicle {
     }
 
     /**
-     *
+     * Gets the vehicle's photo
      *
      * @param {number} [width=400]
      * @param {number} [height=400]
