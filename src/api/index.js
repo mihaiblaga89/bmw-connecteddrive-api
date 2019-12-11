@@ -4,33 +4,54 @@ import querystring from 'querystring';
 import moment from 'moment';
 import axiosRetry from 'axios-retry';
 
-import BMWURLs from '../helpers/urls';
-import Vehicle from '../helpers/vehicle';
-import logger from '../helpers/logger';
+import BMWURLs from '../models/urls';
+import Vehicle from '../models/vehicle';
+import logger from '../models/logger';
 import { VEHICLE_VIEWS } from '../constants';
 
 axiosRetry(axios, { retries: 3 });
 const sleep = (ms = 0) => new Promise(r => setTimeout(r, ms));
 
+/**
+ * API Class
+ *
+ * @class API
+ * @property {Object} [VEHICLE_VIEWS] - Views available for vehicle images
+ * @property {String} [VEHICLE_VIEWS.FRONTSIDE] -
+ * @property {String} [VEHICLE_VIEWS.FRONT] -
+ * @property {String} [VEHICLE_VIEWS.REARSIDE] -
+ * @property {String} [VEHICLE_VIEWS.REAR] -
+ * @property {String} [VEHICLE_VIEWS.SIDE] -
+ * @property {String} [VEHICLE_VIEWS.DASHBOARD] -
+ * @property {String} [VEHICLE_VIEWS.DRIVERDOOR] -
+ * @property {String} [VEHICLE_VIEWS.REARBIRDSEYE] -
+ */
 class API {
     constructor() {
         this.initialized = false;
     }
 
     /**
+     * Initializes the API
      *
-     * * Initialization params
-     * @typedef {Object} APIInitObject
-     * @property {('eu'|'us'|'cn')} region - Region where you have created the ConnectedDrive account
-     * @property {string} username - The username (user@example.com)
-     * @property {string} password - The password
-     * @property {Boolean} [debug=false] - If you want debugging messages shown
-     * @property {Boolean} [skipVehicles=false] - If you want to skip the initial request of vehicles and do it manually with API.getVehicles()
-     *
-     * * Initializes the API
-     *
-     * @param {APIInitObject}
+     * @param {Object} params
+     * @param {('eu'|'us'|'cn')} params.region Region where you have created the ConnectedDrive account
+     * @param {String} params.username The ConnectedDrive username (user@example.com)
+     * @param {String} params.password The ConnectedDrive password
+     * @param {Boolean} [params.debug=false] If you want debugging messages printed to the console
+     * @param {Boolean} [params.skipVehicles=false] If you want to skip the initial request of vehicles and do it manually with API.getVehicles()
+     * @returns {Promise<Boolean>}
      * @memberof API
+     *
+     * @example
+     * import API from '@mihaiblaga89/bmw-connecteddrive-api';
+     *
+     * await API.init({
+     *   region: 'eu',
+     *   username: 'user@example.com',
+     *   password: 'mySuperPassword',
+     *   debug: true,
+     * });
      */
     async init({ region, username, password, debug = false, skipVehicles = false }) {
         if (!region || !username || !password) {
@@ -40,7 +61,7 @@ class API {
         this.region = region;
         this.username = username;
         this.password = password;
-        this.vehicles = [];
+        this.vehicles = null;
         this.BMWURLs = new BMWURLs(region);
         this.oauthToken = null;
         this.refreshToken = null;
@@ -63,8 +84,9 @@ class API {
     /**
      * Make a generic request to BMW API
      *
+     * @private
      * @param {String} url
-     * @returns {Promise}
+     * @returns {Promise<Response>}
      * @memberof API
      */
     async requestWithAuth(url, { overwriteHeaders = {}, method = 'GET', postData = {}, ...rest } = {}) {
@@ -95,7 +117,8 @@ class API {
 
     /**
      * Gets the auth token from BMW API
-     *
+     * @private
+     * @returns {Promise}
      * @memberof API
      */
     async getToken() {
@@ -129,35 +152,32 @@ class API {
     }
 
     /**
-     * Gets or refreshes your vehicles from BMW API and stores them
+     * Gets your currently stored vehicles or fetches them from the BMW's API
      *
      * @memberof API
+     * @param {Boolean} [force=false] Force a refresh from ConnectedDrive API
+     * @returns {Array<Vehicle>}
+     *
+     * @example
+     * const vehicles = await API.getVehicles();
      */
-    async getVehicles() {
+    async getVehicles(force = false) {
         if (!this.initialized) throw new Error('You called a function before init()');
+        if (this.vehicles && !force) return this.vehicles;
+
         const { vehicles } = await this.requestWithAuth(this.BMWURLs.getVehiclesURL());
 
         if (vehicles) {
             this.vehicles = vehicles.map(vehicle => new Vehicle(vehicle, this));
         }
 
-        logger.log('VEHICLES', vehicles);
-        return this.vehicles;
-    }
-
-    /**
-     * Gets your currently stored vehicles
-     *
-     * @memberof API
-     */
-    get currentVehicles() {
-        if (!this.initialized) throw new Error('You called a function before init()');
         return this.vehicles;
     }
 }
 
 // adding constants
 const exported = new API();
+
 exported.VEHICLE_VIEWS = VEHICLE_VIEWS;
 
 export default exported;

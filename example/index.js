@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import API from '../src';
 
 const example = async () => {
@@ -9,8 +10,7 @@ const example = async () => {
             debug: true,
         });
 
-        const { currentVehicles } = API;
-        // const { data } = await currentVehicles[0].getStatus();
+        const currentVehicles = await API.getVehicles();
         console.log('currentVehicles', currentVehicles);
         const image = await currentVehicles[0].getImage();
         console.log('img', image);

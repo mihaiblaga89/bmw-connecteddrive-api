@@ -1,4 +1,4 @@
-import BMWURLs, { getHost } from '../helpers/urls';
+import BMWURLs, { getHost } from '../models/urls';
 
 const URLs = new BMWURLs('eu');
 
@@ -7,9 +7,7 @@ describe('Testing URLS', () => {
         expect(URLs.getHost()).toBe('b2vapi.bmwgroup.com');
     });
     it('should return authURL', () => {
-        expect(URLs.getAuthURL()).toBe(
-            'https://b2vapi.bmwgroup.com/gcdm/oauth/token'
-        );
+        expect(URLs.getAuthURL()).toBe('https://b2vapi.bmwgroup.com/gcdm/oauth/token');
     });
     it('should return vehicleStatusURL', () => {
         expect(URLs.getVehicleStatusURL('test')).toBe(

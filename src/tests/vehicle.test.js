@@ -1,4 +1,4 @@
-import Vehicle from '../helpers/vehicle';
+import Vehicle from '../models/vehicle';
 
 const vehicle = {
     vin: 'WBAFFFFFFFF',

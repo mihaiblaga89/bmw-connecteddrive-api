@@ -7,7 +7,11 @@
     },
     "jsdoc": {
         "recurse": true,
-        "undocumented": true
+        "undocumented": true,
+        "package": true,
+        "hierarchy": true,
+        "module": true,
+        "allowUnknownTags": true
     },
     "app": {
         "title": "BMW ConnectedDrive API Documentation",

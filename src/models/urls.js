@@ -6,13 +6,14 @@ export const getHost = region => {
 };
 /**
  * Handles all URLs required by BMW API
- *
+ * @private
  * @class BMWURLs
  */
 class BMWURLs {
     /**
      *Creates an instance of BMWURLs.
-     * @param {*} region
+     * @param {String} region
+     * @private
      * @memberof BMWURLs
      */
     constructor(region) {

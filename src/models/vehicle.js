@@ -1,5 +1,7 @@
 import BMWURLs from './urls';
 import { VEHICLE_VIEWS } from '../constants';
+import VehicleStatus from './vehicleStatus';
+
 /**
  * Vehicle class that handles all the operations for a particular vehicle
  *
@@ -20,6 +22,9 @@ class Vehicle {
      * @readonly
      * @returns {String}
      * @memberof Vehicle
+     *
+     * @example
+     * const { vin } = Vehicle
      */
     get vin() {
         return this.originalData.vin;
@@ -31,6 +36,9 @@ class Vehicle {
      * @readonly
      * @returns {String}
      * @memberof Vehicle
+     *
+     * @example
+     * const { model } = Vehicle
      */
     get model() {
         return this.originalData.model;
@@ -39,24 +47,31 @@ class Vehicle {
     /**
      * Gets the status of the vehicle
      *
-     * @param {Boolean} force - Force a refresh instead of getting cached data
+     * @param {Boolean} [force=false] - Force a refresh instead of getting cached data
      * @returns {Promise<VehicleStatus>}
      * @memberof Vehicle
+     *
+     * @example
+     * const ctatus = await Vehicle.getStatus();
      */
     async getStatus(force) {
         if (this.status && !force) return this.status;
-        this.status = await this.API.requestWithAuth(this.BMWURLs.getVehicleStatusURL(this.vin));
+        const currentStatus = await this.API.requestWithAuth(this.BMWURLs.getVehicleStatusURL(this.vin));
+        this.status = VehicleStatus(currentStatus);
         return this.status;
     }
 
     /**
      * Gets the vehicle's photo
      *
-     * @param {number} [width=400]
-     * @param {number} [height=400]
-     * @param {VEHICLE_VIEWS} [view=VEHICLE_VIEWS.FRONTSIDE] - Must be one of API.VEHICLE_VIEWS.*
+     * @param {number} [width=400] Image's width
+     * @param {number} [height=400] Image's height
+     * @param {String} [view=VEHICLE_VIEWS.FRONTSIDE] - Must be one of {@link API|API.VEHICLE_VIEWS}.*
      * @returns {String} - the image as base64 string
      * @memberof Vehicle
+     *
+     * @example
+     * const image = await Vehicle.getImage(400, 400, API.VEHICLE_VIEWS.FRONTSIDE);
      */
     async getImage(width = 400, height = 400, view = VEHICLE_VIEWS.FRONTSIDE) {
         if (this.images[`${view}:${width}:${height}`]) {
