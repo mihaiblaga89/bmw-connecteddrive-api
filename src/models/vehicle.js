@@ -56,8 +56,8 @@ class Vehicle {
      */
     async getStatus(force) {
         if (this.status && !force) return this.status;
-        const currentStatus = await this.API.requestWithAuth(this.BMWURLs.getVehicleStatusURL(this.vin));
-        this.status = VehicleStatus(currentStatus);
+        const { vehicleStatus } = await this.API.requestWithAuth(this.BMWURLs.getVehicleStatusURL(this.vin));
+        this.status = VehicleStatus(vehicleStatus);
         return this.status;
     }
 
