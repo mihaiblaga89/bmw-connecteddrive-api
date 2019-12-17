@@ -6,5 +6,29 @@
 <a href="https://www.codefactor.io/repository/github/mihaiblaga89/bmw-connecteddrive-api/overview/master"><img src="https://www.codefactor.io/repository/github/mihaiblaga89/bmw-connecteddrive-api/badge/master" alt="CodeFactor" style="max-width: 100%;"></a></p>
 <p>JavaScript implementation of the BMW's ConnectedDrive API</p>
 <p>Example: <a href="https://github.com/mihaiblaga89/bmw-status-app">BMWStatus</a></p>
-<p>@todo write documentation</p>
+<h2 id="usage">Usage</h2>
+<hr />
+<pre><code class="javascript">import API from '@mihaiblaga89/bmw-connecteddrive-api';
+
+await API.init({
+  region: 'eu',
+  username: 'user@example.com',
+  password: 'mySuperPassword'
+});
+
+const vehicles = await API.getVehicles();
+
+const vehicleStatus = await vehicles[0].getStatus();</code></pre>
+<h2 id="api-methods">API Methods</h2>
+<hr />
+<h4 id="apiinit-options-">API.init(options)</h4>
+<p>Initializes the API with your credentials. By default it also fetches your vehicles and saves them but you can disable this behaviour if you want. <a href="https://bmwapi.mihaiblaga.dev/?api#API#init">More info</a></p>
+<h4 id="apigetvehicles-force-">API.getVehicles(force)</h4>
+<p>Returns your prefetched vehicles or queries the BMW API for them. Has the option to force the query to refresh your vehicles. Every vehicle is an instance of <a href="https://bmwapi.mihaiblaga.dev/?api#Vehicle">Vehicle</a>. <a href="https://bmwapi.mihaiblaga.dev/?api#API#getVehicles">More info</a></p>
+<h2 id="vehicle-methods">Vehicle Methods</h2>
+<hr />
+<h4 id="vehiclegetimage-width-height-view-">Vehicle.getImage(width, height, view)</h4>
+<p>Fetches and caches your vehicle image from BMW API. Of course it's not the actual photo, it's just a car photo based on your car's model and color :). Several "views" are available. <a href="https://bmwapi.mihaiblaga.dev/?api#Vehicle#getImage">More info</a> </p>
+<h4 id="vehiclegetstatus-force-">Vehicle.getStatus(force)</h4>
+<p>Fetches and caches the car's status from the API. Can be forced. Returns an instance of <a href="https://bmwapi.mihaiblaga.dev/?api#VehicleStatus">VehicleStatus</a>. <a href="https://bmwapi.mihaiblaga.dev/?api#Vehicle#getStatus">More info</a></p>
 </body></html>
