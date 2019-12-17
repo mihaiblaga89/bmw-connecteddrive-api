@@ -3,7 +3,8 @@
 <hr />
 <p><a href="https://codecov.io/gh/mihaiblaga89/bmw-connecteddrive-api"><img src="https://codecov.io/gh/mihaiblaga89/bmw-connecteddrive-api/branch/master/graph/badge.svg" alt="codecov" style="max-width: 100%;"></a>
 <a href="https://github.com/mihaiblaga89/bmw-connecteddrive-api/actions"><img src="https://github.com/mihaiblaga89/bmw-connecteddrive-api/workflows/tests/badge.svg" alt="Actions Status" style="max-width: 100%;"></a>
-<a href="https://www.codefactor.io/repository/github/mihaiblaga89/bmw-connecteddrive-api/overview/master"><img src="https://www.codefactor.io/repository/github/mihaiblaga89/bmw-connecteddrive-api/badge/master" alt="CodeFactor" style="max-width: 100%;"></a></p>
+<a href="https://www.codefactor.io/repository/github/mihaiblaga89/bmw-connecteddrive-api/overview/master"><img src="https://www.codefactor.io/repository/github/mihaiblaga89/bmw-connecteddrive-api/badge/master" alt="CodeFactor" style="max-width: 100%;"></a>
+<a href="https://github.com/mihaiblaga89/bmw-connecteddrive-api/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@mihaiblaga89/bmw-connecteddrive-api" alt="License" style="max-width: 100%;"></a></p>
 <p>JavaScript implementation of the BMW's ConnectedDrive API</p>
 <p>Example: <a href="https://github.com/mihaiblaga89/bmw-status-app">BMWStatus</a></p>
 <h2 id="usage">Usage</h2>
@@ -11,9 +12,9 @@
 <pre><code class="javascript">import API from '@mihaiblaga89/bmw-connecteddrive-api';
 
 await API.init({
-  region: 'eu',
-  username: 'user@example.com',
-  password: 'mySuperPassword'
+    region: 'eu',
+    username: 'user@example.com',
+    password: 'mySuperPassword',
 });
 
 const vehicles = await API.getVehicles();
@@ -28,7 +29,24 @@ const vehicleStatus = await vehicles[0].getStatus();</code></pre>
 <h2 id="vehicle-methods">Vehicle Methods</h2>
 <hr />
 <h4 id="vehiclegetimage-width-height-view-">Vehicle.getImage(width, height, view)</h4>
-<p>Fetches and caches your vehicle image from BMW API. Of course it's not the actual photo, it's just a car photo based on your car's model and color :). Several "views" are available. <a href="https://bmwapi.mihaiblaga.dev/?api#Vehicle#getImage">More info</a> </p>
+<p>Fetches and caches your vehicle image from BMW API. Of course it's not the actual photo, it's just a car photo based on your car's model and color :). Several "views" are available. <a href="https://bmwapi.mihaiblaga.dev/?api#Vehicle#getImage">More info</a></p>
 <h4 id="vehiclegetstatus-force-">Vehicle.getStatus(force)</h4>
 <p>Fetches and caches the car's status from the API. Can be forced. Returns an instance of <a href="https://bmwapi.mihaiblaga.dev/?api#VehicleStatus">VehicleStatus</a>. <a href="https://bmwapi.mihaiblaga.dev/?api#Vehicle#getStatus">More info</a></p>
+<h2 id="acknowledgments">Acknowledgments</h2>
+<hr />
+<p>This work was inspired by the following repos:</p>
+<ul>
+<li><a href="https://github.com/bimmerconnected/bimmer_connected">https://github.com/bimmerconnected/bimmer_connected</a></li>
+<li><a href="https://github.com/edent/BMW-i-Remote">https://github.com/edent/BMW-i-Remote</a></li>
+<li><a href="https://shkspr.mobi/blog/2015/11/reverse-engineering-the-bmw-i3-api/">https://shkspr.mobi/blog/2015/11/reverse-engineering-the-bmw-i3-api/</a></li>
+</ul>
+<p>Thank you for your efforts and hard work.</p>
+<h2 id="license">License</h2>
+<hr />
+<ul>
+<li><a href="https://github.com/mihaiblaga89/bmw-connecteddrive-api/blob/master/LICENSE">MIT License</a></li>
+</ul>
+<h2 id="disclaimer">Disclaimer</h2>
+<hr />
+<p>This library is not affiliated nor endorsed by BMW Group / Bayerische Motoren Werke AG.</p>
 </body></html>

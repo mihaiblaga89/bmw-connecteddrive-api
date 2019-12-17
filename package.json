@@ -22,7 +22,7 @@
         "bmw-connecteddrive"
     ],
     "author": "Mihai Blaga <mihaiblaga89@gmail.com> (https://www.mihaiblaga.dev)",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/mihaiblaga89/bmw-connecteddrive-api/issues"
     },
