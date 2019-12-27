@@ -30,6 +30,7 @@ const vehicleStatus = (status = {}) => {
      * @property {String} digitalChargingServiceActivation Status of the Digital Charging Services
      * @property {String} digitalChargingServiceOngoing Status of the Digital Charging Services
      * @property {Array<CBSData>} conditionBasedServicingData CBS Data
+     * @property {Boolean} cached Whether or not the data returned is from cache or not
      */
     return {
         digitalChargingServiceActivation: status.DCS_CCH_Activation,
@@ -73,6 +74,7 @@ const vehicleStatus = (status = {}) => {
         windowDriverRear: status.windowDriverRear,
         windowPassengerFront: status.windowPassengerFront,
         windowPassengerRear: status.windowPassengerRear,
+        cached: false,
     };
 };
 
