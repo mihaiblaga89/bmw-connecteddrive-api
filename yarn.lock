@@ -1751,10 +1751,10 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.0.tgz#24390e6ad61386b0a747265754d2a17219de862c"
   integrity sha512-Uvq6hVe90D0B2WEnUqtdgY1bATGz3mw33nH9Y+dmA+w5DHvUmBgkr5rM/KCHpCsiFNRUfokW/szpPPgMK2hm4A==
 
-axios-retry@^3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-3.1.4.tgz#257343eec843d8ada46b889308fd1c4538d7afb2"
-  integrity sha512-Bdtl2vbYl2/ixxZBvMyJb2ZWwMh3vrgYPOQgnXTqt2ZReN7nnZsPD3Q4IoamUM0wl9gRrKpDgtDhoL4YpQyX/A==
+axios-retry@^3.1.8:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-3.1.8.tgz#ffcfed757e1fab8cbf832f8505bb0e0af47c520c"
+  integrity sha512-yPw5Y4Bg6Dgmhm35KaJFtlh23s1TecW0HsUerK4/IS1UKl0gtN2aJqdEKtVomiOS/bDo5w4P3sqgki/M10eF8Q==
   dependencies:
     is-retry-allowed "^1.1.0"
 
