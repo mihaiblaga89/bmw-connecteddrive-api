@@ -46,7 +46,7 @@
         "eslint-plugin-jest": "^23.20.0",
         "eslint-plugin-prettier": "^3.1.4",
         "husky": "^4.2.5",
-        "jest": "^26.4.0",
+        "jest": "^26.4.2",
         "jest-mock-axios": "^3.2.0",
         "prettier": "^2.0.5",
         "pretty-quick": "^2.0.1",
