@@ -28,7 +28,7 @@
     },
     "homepage": "https://github.com/mihaiblaga89/bmw-connecteddrive-api#readme",
     "dependencies": {
-        "axios": "0.21.3",
+        "axios": "0.21.4",
         "axios-retry": "^3.1.9",
         "moment": "^2.29.1",
         "querystring": "^0.2.1"
