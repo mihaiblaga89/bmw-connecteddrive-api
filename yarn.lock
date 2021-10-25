@@ -1483,6 +1483,13 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
+"@babel/runtime@^7.15.4":
+  version "7.15.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.15.4.tgz#fd17d16bfdf878e6dd02d19753a39fa8a8d9c84a"
+  integrity sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.8.4":
   version "7.8.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.7.tgz#8fefce9802db54881ba59f90bb28719b4996324d"
@@ -2341,12 +2348,13 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.0.tgz#24390e6ad61386b0a747265754d2a17219de862c"
   integrity sha512-Uvq6hVe90D0B2WEnUqtdgY1bATGz3mw33nH9Y+dmA+w5DHvUmBgkr5rM/KCHpCsiFNRUfokW/szpPPgMK2hm4A==
 
-axios-retry@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-3.2.0.tgz#eb48e72f90b177fde62329b2896aa8476cfb90ba"
-  integrity sha512-RK2cLMgIsAQBDhlIsJR5dOhODPigvel18XUv1dDXW+4k1FzebyfRk+C+orot6WPZOYFKSfhLwHPwVmTVOODQ5w==
+axios-retry@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-3.2.3.tgz#c889f2e408f2616ae18e190d1387c93bd4a5b6e2"
+  integrity sha512-JfxUUN6PDyinrDVP/NbCKxmwvwJfMfQ0DLs95o/OEd+mw5+hrBXNGfx1Wq2gskd7ODWc4kcd9CjStCpDv3Us4g==
   dependencies:
-    is-retry-allowed "^1.1.0"
+    "@babel/runtime" "^7.15.4"
+    is-retry-allowed "^2.2.0"
 
 axios@0.22.0:
   version "0.22.0"
@@ -4299,10 +4307,10 @@ is-regex@^1.1.3:
     call-bind "^1.0.2"
     has-tostringtag "^1.0.0"
 
-is-retry-allowed@^1.1.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/is-retry-allowed/-/is-retry-allowed-1.2.0.tgz#d778488bd0a4666a3be8a1482b9f2baafedea8b4"
-  integrity sha512-RUbUeKwvm3XG2VYamhJL1xFktgjvPzL0Hq8C+6yrWIswDy3BIXGqCxhxkc30N9jqK311gVU137K8Ei55/zVJRg==
+is-retry-allowed@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/is-retry-allowed/-/is-retry-allowed-2.2.0.tgz#88f34cbd236e043e71b6932d09b0c65fb7b4d71d"
+  integrity sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg==
 
 is-stream@^1.1.0:
   version "1.1.0"
