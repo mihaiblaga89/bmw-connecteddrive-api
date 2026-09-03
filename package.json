@@ -34,10 +34,10 @@
         "querystring": "^0.2.1"
     },
     "devDependencies": {
-        "@babel/cli": "^7.22.5",
+        "@babel/cli": "^8.0.4",
         "@babel/core": "^7.22.5",
-        "@babel/node": "^7.22.5",
-        "@babel/preset-env": "^7.22.5",
+        "@babel/node": "^8.0.1",
+        "@babel/preset-env": "^8.0.2",
         "babel-polyfill": "^6.26.0",
         "eslint": "^7.32.0",
         "eslint-config-airbnb-base": "^14.2.1",
